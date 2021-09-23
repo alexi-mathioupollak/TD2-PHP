@@ -1,6 +1,6 @@
 <?php
    
-class Voiture {
+class ModelVoiture {
    
     private $marque;
     private $couleur;
@@ -48,15 +48,15 @@ class Voiture {
     }
                  
     // une methode d'affichage.
-    public function afficher() {
+    /* public function afficher() {
       echo "Marque : $this->marque,
       Couleur : $this->couleur,
       Immatriculation : $this->immatriculation.";
-    }
+    } */
 
     public static function getAllVoitures() {
         $rep = Model::getPDO()->query('SELECT * FROM voiture');
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'voiture');
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
         $tab_voit = $rep->fetchAll();
         return $tab_voit;
     }
@@ -83,7 +83,7 @@ class Voiture {
         $req_prep->execute($values);
 
         // On récupère les résultats comme précédemment
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Voiture');
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelVoiture');
         $tab_voit = $req_prep->fetchAll();
         // Attention, si il n'y a pas de résultats, on renvoie false
         if (empty($tab_voit)) 
